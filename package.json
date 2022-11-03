@@ -1,5 +1,6 @@
 {
   "name": "projeto12-twiteroo",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^1.1.3"
+    "axios": "^1.1.3",
+    "express": "^4.18.2"
   }
 }
