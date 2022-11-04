@@ -1,10 +1,15 @@
 import express from "express"
-const app = express();
+import cors from "cors"
 
-const tweet = {
+const app = express();
+app.use(cors())
+app.use(express.json());
+
+
+const tweets = [{
 	username: "bobesponja",
   tweet: "eu amo o hub"
-}
+}]
 
 const username = {
 	username: 'bobesponja', 
@@ -12,7 +17,19 @@ const username = {
 }
 
 app.get("/tweets", (req,res) =>{
-    res.send(tweet)
+    res.send(tweets)
 });
+
+
+app.post("/tweets", (req, res) => {
+    const novoTweet = { 
+        username: req.body.username,
+        tweet: req.body.tweet,
+    };
+    tweets.push( novoTweet);
+
+  res.sendStatus(201);
+});
+
 
 app.listen(5000)
