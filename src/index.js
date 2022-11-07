@@ -12,8 +12,8 @@ const tweets = [{
 }]
 
 const usernames = [{
-	username: 'bobesponja', 
-	avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info" 
+  username: "bobesponja",
+  avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info"
 }];
 
 
@@ -22,7 +22,8 @@ app.post("/tweets", (req, res) => {
         username: req.body.username,
         tweet: req.body.tweet,
     };
-    tweets.push( novoTweet);
+    
+    tweets.unshift( novoTweet);
 
     res.status(201).send("Criado com sucesso");
 });
@@ -39,7 +40,20 @@ app.post("/sign-up", (req, res) => {
 
 
 app.get("/tweets", (req,res) =>{
-  res.send(tweets);
+  /* const getAvatar = { 
+    avatar: req.body.avatar,
+}; */
+
+const tweetFim = tweets.map((tweet) => {
+  const getAvatar = usernames.find((object) => object.username === tweet.username).avatar
+  return {
+    username: tweet.username,
+    avatar: getAvatar,
+    tweet: tweet.tweet
+  }
+});
+
+  res.status(201).send(tweetFim);
 });
 
 app.listen(5000)
